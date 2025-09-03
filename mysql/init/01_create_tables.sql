@@ -1,20 +1,24 @@
--- Sample initialization script for demo database
--- This file will be automatically executed when the MySQL container starts for the first time
-
 USE demo_db;
 
--- Posts table with only id and title
-CREATE TABLE IF NOT EXISTS posts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL
+create table if not exists users (
+    id int auto_increment primary key,
+    name varchar(255) not null,
+    email varchar(255) not null
 );
 
--- Example data insertion for posts
-INSERT INTO posts (title) VALUES 
-('First Post'),
-('Second Post'),
-('Third Post');
+create unique index idx_users_email on users (email);
 
--- Grant privileges (optional, as demo_user already has access to demo_db)
+insert into users (name, email) values ('First User', 'first@example.com'), ('Second User', 'second@example.com'), ('Third User', 'third@example.com');
+
+create table if not exists notes (
+    id int auto_increment primary key,
+    body text not null,
+    user_id int not null,
+    foreign key (user_id) references users(id) on delete cascade
+);
+
+insert into notes (body, user_id) values ('First Note', 1), ('Second Note', 2), ('Third Note', 3);
+
 GRANT ALL PRIVILEGES ON demo_db.* TO 'demo_user'@'%';
+
 FLUSH PRIVILEGES;
