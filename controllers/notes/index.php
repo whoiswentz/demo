@@ -6,7 +6,7 @@ $heading = 'My Notes';
 
 $username = "demo_user";
 $password = "demo_password";
-$config = require('config.php');
+$config = require 'config.php';
 
 $db = new Database($config['database'], $username, $password);
 
