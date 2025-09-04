@@ -6,12 +6,17 @@ $heading = 'Notes';
 
 $username = "demo_user";
 $password = "demo_password";
-$config = require('config.php');
+$config = require 'config.php';
 
 $db = new Database($config['database'], $username, $password);
 
 $note = $db
-    ->query("select * from notes where id = :id", ['id' => $_GET['id']])
-    ->fetch();
+    ->query("select * from notes where id = :id and user_id = :user_id", [
+        'user_id' => 1,
+        'id' => $_GET['id']
+    ])
+    ->fetchOrFail();
+    
+authorize($note['user_id'] === 1);
 
 include 'views/note.view.php';

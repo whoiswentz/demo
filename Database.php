@@ -2,6 +2,7 @@
 
 class Database {
     private PDO $connection;
+    private PDOStatement $statement;
 
     public function __construct(
         array $config, 
@@ -19,13 +20,30 @@ class Database {
         }        
     }
 
-    public function query(string $sql, array $params = []): PDOStatement {
-        try {
-            $statement = $this->connection->prepare($sql);
-            $statement->execute($params);
-            return $statement;
-        } catch (PDOException $exception) {
-            die("Database query failed: " . $exception->getMessage());
+    public function query(string $sql, array $params = []): Database {
+        $this->statement = $this->connection->prepare($sql);
+        $this->statement->execute($params);
+        return $this;
+    }
+
+    public function fetch(): array|false {
+        return $this->statement->fetch();
+    }
+
+    public function fetchOrFail(): array {
+        $result = $this->fetch();
+
+        // This is a anti-pattern, but for demo purpose it's okay
+        // Never call an interface function from the database
+        // Throw error or return null instead
+        // Handle error in the controller
+        if (!$result) {
+            abort();
         }
+        return $result;
+    }
+
+    public function fetchAll(): array {
+        return $this->statement->fetchAll();
     }
 }
