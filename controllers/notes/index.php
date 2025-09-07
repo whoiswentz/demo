@@ -14,4 +14,4 @@ $notes = $db
     ->query("select * from notes")
     ->fetchAll();
 
-include 'views/notes.view.php';
+include 'views/notes/index.view.php';

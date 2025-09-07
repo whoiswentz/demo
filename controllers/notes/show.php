@@ -19,4 +19,4 @@ $note = $db
     
 authorize($note['user_id'] === 1);
 
-include 'views/note.view.php';
+include 'views/notes/show.view.php';

@@ -24,4 +24,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include "views/note-create.view.php";
+include "views/notes/create.view.php";
