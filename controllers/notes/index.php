@@ -1,12 +1,10 @@
 <?php
 
-require_once 'function.php';
-
-$heading = 'My Notes';
+require_once base_path('core/function.php');
 
 $username = "demo_user";
 $password = "demo_password";
-$config = require 'config.php';
+$config = require base_path('config.php');
 
 $db = new Database($config['database'], $username, $password);
 
@@ -14,4 +12,7 @@ $notes = $db
     ->query("select * from notes")
     ->fetchAll();
 
-include 'views/notes/index.view.php';
+view('notes/index', [
+    'heading' => 'My Notes',
+    'notes' => $notes,
+]);

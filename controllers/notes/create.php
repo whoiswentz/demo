@@ -1,12 +1,8 @@
 <?php
 
-require 'Validator.php';
-
-$heading = "Create Note";
-
 $username = "demo_user";
 $password = "demo_password";
-$config = require 'config.php';
+$config = require base_path('config.php');
 
 $db = new Database($config['database'], $username, $password);
 
@@ -24,4 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include "views/notes/create.view.php";
+view('notes/create', [
+    'heading' => 'Create Note',
+    'errors' => $errors
+]);

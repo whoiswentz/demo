@@ -1,12 +1,10 @@
 <?php
 
-require_once 'function.php';
-
-$heading = 'Notes';
+require_once base_path('core/function.php');
 
 $username = "demo_user";
 $password = "demo_password";
-$config = require 'config.php';
+$config = require base_path('config.php');
 
 $db = new Database($config['database'], $username, $password);
 
@@ -19,4 +17,7 @@ $note = $db
     
 authorize($note['user_id'] === 1);
 
-include 'views/notes/show.view.php';
+view('notes/show', [
+    'heading' => 'Notes',
+    'note' => $note
+]);
