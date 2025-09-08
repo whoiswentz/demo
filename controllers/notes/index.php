@@ -1,5 +1,7 @@
 <?php
 
+use Core\Database;
+
 require_once base_path('core/function.php');
 
 $username = "demo_user";

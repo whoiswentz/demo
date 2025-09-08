@@ -1,5 +1,8 @@
 <?php
 
+use Core\Database;
+use Core\Validator;
+
 $username = "demo_user";
 $password = "demo_password";
 $config = require base_path('config.php');
