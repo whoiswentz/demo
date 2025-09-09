@@ -19,7 +19,7 @@ function abort(Response $code = Response::NOT_FOUND): void {
     $value = $code->value;
     
     http_response_code($value);
-    require "views/{$value}.view.php";
+    require base_path("views/{$value}.view.php");
     die();
 }
 
