@@ -1,5 +1,5 @@
 <?php
 
 view('about', [
-    'heading' => 'About'
+	'heading' => 'About',
 ]);

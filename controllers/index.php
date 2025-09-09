@@ -1,5 +1,5 @@
 <?php
 
 view('index', [
-    'heading' => 'Home'
+	'heading' => 'Home',
 ]);

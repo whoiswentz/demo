@@ -1,0 +1,6 @@
+[source]
+paths = ["controllers", "core", "public", "views"]
+
+[formatter]
+print-width = 100
+use-tabs = true
