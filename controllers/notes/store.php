@@ -1,13 +1,10 @@
 <?php
 
+use Core\App;
 use Core\Database;
 use Core\Validator;
 
-$username = 'demo_user';
-$password = 'demo_password';
-$config = require base_path('config.php');
-
-$db = new Database($config['database'], $username, $password);
+$db = App::resolve(Database::class);
 
 $errors = [];
 
