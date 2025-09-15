@@ -2,13 +2,13 @@ USE demo_db;
 
 create table if not exists users (
     id int auto_increment primary key,
-    name varchar(255) not null,
-    email varchar(255) not null
+    email varchar(255) not null,
+    password varchar(255) not null
 );
 
 create unique index idx_users_email on users (email);
 
-insert into users (name, email) values ('First User', 'first@example.com'), ('Second User', 'second@example.com'), ('Third User', 'third@example.com');
+insert into users (email, password) values ('first@example.com', 'password'), ('second@example.com', 'password'), ('third@example.com', 'password');
 
 create table if not exists notes (
     id int auto_increment primary key,
