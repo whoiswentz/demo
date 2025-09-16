@@ -25,7 +25,9 @@ if (count($errors)) {
 
 $db = App::resolve(Database::class);
 
-$user = $db->query('SELECT * FROM users WHERE email = :email', ['email' => $email])->fetch();
+$user = $db->query('SELECT * FROM users WHERE email = :email', [
+	'email' => $email,
+])->fetch();
 if ($user) {
 	$errors['email'] = 'Email already exists';
 	header('Location: /');
@@ -33,11 +35,16 @@ if ($user) {
 } else {
 	$db->query('INSERT INTO users (email, password) VALUES (:email, :password)', [
 		'email' => $email,
-		'password' => $password,
+		'password' => password_hash($password, PASSWORD_BCRYPT),
 	]);
 
+	// Fetch the newly created user for login
+	$user = $db->query('SELECT * FROM users WHERE email = :email', [
+		'email' => $email,
+	])->fetch();
+
 	$_SESSION['flash'] = 'Your account has been created';
-	$_SESSION['user'] = ['email' => $email];
+	login($user);
 
 	header('Location: /');
 	exit();

@@ -9,17 +9,19 @@
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
                         <a href="/" aria-current="page" class="<?= isUrl('/')
-	                        ? 'bg-gray-950/50 text-white'
-	                        : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Home</a>
+                                                                    ? 'bg-gray-950/50 text-white'
+                                                                    : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Home</a>
                         <a href="/about" class="<?= isUrl('/about')
-	                        ? 'bg-gray-950/50 text-white'
-	                        : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">About</a>
-                        <a href="/notes" class="<?= isUrl('/notes')
-	                        ? 'bg-gray-950/50 text-white'
-	                        : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+                                                    ? 'bg-gray-950/50 text-white'
+                                                    : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">About</a>
+                        <?php if ($_SESSION['user'] ?? false): ?>
+                            <a href="/notes" class="<?= isUrl('/notes')
+                                                        ? 'bg-gray-950/50 text-white'
+                                                        : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+                        <?php endif; ?>
                         <a href="/contact" class="<?= isUrl('/contact')
-	                        ? 'bg-gray-950/50 text-white'
-	                        : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                                                        ? 'bg-gray-950/50 text-white'
+                                                        : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Contact</a>
                     </div>
                 </div>
             </div>
@@ -36,23 +38,31 @@
                     </button>
 
                     <!-- Profile dropdown -->
-                    <el-dropdown class="relative ml-3">
-                        <button class="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                            <span class="absolute -inset-1.5"></span>
-                            <span class="sr-only">Open user menu</span>
-                            <?php if ($_SESSION['user'] ?? false): ?>
+                    <?php if ($_SESSION['user'] ?? false): ?>
+                        <el-dropdown class="relative ml-3">
+                            <button class="relative flex max-w-xs items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                <span class="absolute -inset-1.5"></span>
+                                <span class="sr-only">Open user menu</span>
                                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
-                            <?php else: ?>
-                                <a href="/register" class="text-gray-300 hover:bg-white/5 hover:text-white">Register</a>
-                            <?php endif; ?>
-                        </button>
+                            </button>
 
-                        <el-menu anchor="bottom end" popover class="w-48 origin-top-right rounded-md bg-gray-800 py-1 outline-1 -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Your profile</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Sign out</a>
-                        </el-menu>
-                    </el-dropdown>
+                            <el-menu anchor="bottom end" popover class="w-48 origin-top-right rounded-md bg-gray-800 py-1 outline-1 -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Your profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Settings</a>
+                                <form action="/session" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="w-full text-left block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Sign out</button>
+                                </form>
+                            </el-menu>
+                        </el-dropdown>
+                    <?php else: ?>
+                        <a href="/registration" class="<?= isUrl('/about')
+                                                            ? 'bg-gray-950/50 text-white'
+                                                            : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Register</a>
+                        <a href="/login" class="<?= isUrl('/login')
+                                                    ? 'bg-gray-950/50 text-white'
+                                                    : 'text-gray-300' ?> rounded-md px-3 py-2 text-sm font-medium">Login</a>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="-mr-2 flex md:hidden">
