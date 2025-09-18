@@ -1,5 +1,5 @@
 [source]
-paths = ["controllers", "core", "public", "views"]
+paths = ["Http", "core", "public", "views"]
 
 [formatter]
 print-width = 100

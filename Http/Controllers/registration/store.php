@@ -30,8 +30,7 @@ $user = $db->query('SELECT * FROM users WHERE email = :email', [
 ])->fetch();
 if ($user) {
 	$errors['email'] = 'Email already exists';
-	header('Location: /');
-	exit();
+	redirect('/');
 } else {
 	$db->query('INSERT INTO users (email, password) VALUES (:email, :password)', [
 		'email' => $email,
@@ -46,6 +45,5 @@ if ($user) {
 	$_SESSION['flash'] = 'Your account has been created';
 	login($user);
 
-	header('Location: /');
-	exit();
+	redirect('/');
 }
