@@ -1,5 +1,5 @@
 [source]
-paths = ["Http", "core", "public", "views"]
+paths = ["Http", "Core", "public", "views", "tests"]
 
 [formatter]
 print-width = 100

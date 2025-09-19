@@ -9,15 +9,11 @@ $attributes = [
 ];
 
 $form = LoginForm::validate($attributes);
-$authenticator = new Authenticator();
 
-$signedIn = $authenticator->attempt(
-	$form->attributes['email'],
-	$form->attributes['password']
-);
+$authenticator = new Authenticator();
+$signedIn = $authenticator->attempt($form->attributes['email'], $form->attributes['password']);
 if (!$signedIn) {
-	$form->error('email', 'The provided credentials are incorrect')
-		->throw();
+	$form->error('email', 'The provided credentials are incorrect')->throw();
 }
 
 redirect('/');

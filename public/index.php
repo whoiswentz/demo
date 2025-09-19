@@ -6,13 +6,8 @@ use Core\Session;
 
 const BASE_PATH = __DIR__ . '/../';
 
-require BASE_PATH . 'core/function.php';
-
-spl_autoload_register(function ($class) {
-	$file = str_replace('\\', '/', $class);
-	$file = str_replace('Core/', 'core/', $file);
-	require base_path("{$file}.php");
-});
+require BASE_PATH . 'vendor/autoload.php';
+require BASE_PATH . 'Core/function.php';
 
 Session::start();
 
